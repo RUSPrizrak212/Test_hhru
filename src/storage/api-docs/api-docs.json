@@ -1,0 +1,995 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Example for response examples value",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/cars": {
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Create new",
+                "operationId": "a556a7ef4e7d4fa6f8bac6af3c716ac9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Kia rio 3"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Car"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cars/{carId}": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Get by ID",
+                "operationId": "528989c860c5a0e9871808afb2415acc",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Car"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Delete by ID",
+                "operationId": "29be6530dbf63e3f4f37688dd8ea7e18",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Update by ID",
+                "operationId": "f37c0cff7ba37e422d9cb0000228acd7",
+                "parameters": [
+                    {
+                        "name": "carId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Kia Rio 3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Successfully"
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cars/available": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Get list cars available (actual price)",
+                "operationId": "945c3f7a7ae1d0953818bdaad82d55b1",
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/Car"
+                                                    },
+                                                    {
+                                                        "properties": {
+                                                            "configurations": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "allOf": [
+                                                                        {
+                                                                            "properties": {
+                                                                                "id": {
+                                                                                    "description": "ID",
+                                                                                    "type": "integer",
+                                                                                    "example": 10
+                                                                                },
+                                                                                "name": {
+                                                                                    "description": "Name",
+                                                                                    "type": "string",
+                                                                                    "example": "Lux"
+                                                                                },
+                                                                                "options": {
+                                                                                    "description": "Name",
+                                                                                    "type": "array",
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "example": "Lanterns"
+                                                                                    }
+                                                                                },
+                                                                                "current_price": {
+                                                                                    "description": "Actual price",
+                                                                                    "type": "integer",
+                                                                                    "example": 10000
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/configurations": {
+            "post": {
+                "tags": [
+                    "Configurations"
+                ],
+                "summary": "Create new",
+                "operationId": "dd9008108efe93a999cb0a09b361af89",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "car_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "car_id": 10,
+                                    "name": "Lux"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Configuration"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/configurations/{configurationId}": {
+            "patch": {
+                "tags": [
+                    "Configurations"
+                ],
+                "summary": "Update by ID",
+                "operationId": "601e34befda8b8bf77278d34d6a6a9f7",
+                "parameters": [
+                    {
+                        "name": "configurationId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Kia Rio 3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully"
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/configurations/{configurationsId}": {
+            "get": {
+                "tags": [
+                    "Configurations"
+                ],
+                "summary": "Get by ID",
+                "operationId": "9249d2df755079d043173b727afb6514",
+                "parameters": [
+                    {
+                        "name": "configurationsId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Configuration"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Configurations"
+                ],
+                "summary": "Delete by ID",
+                "operationId": "ea5387c1a1865e29bd88fe7b9146be65",
+                "parameters": [
+                    {
+                        "name": "configurationsId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/options": {
+            "post": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Create new",
+                "operationId": "e4a501dfd20844f6d98ef1bea8e2a2a3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Lux"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Option"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/options/{optionId}": {
+            "get": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Get by ID",
+                "operationId": "9daf6da5b22c3ebae24a15bf7f8ab27f",
+                "parameters": [
+                    {
+                        "name": "optionId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Option"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Delete by ID",
+                "operationId": "d0afb74a70fe9c42162d04a8bda00070",
+                "parameters": [
+                    {
+                        "name": "optionId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Options"
+                ],
+                "summary": "Update by ID",
+                "operationId": "8d9b6d0650041b094d4c3482748b920b",
+                "parameters": [
+                    {
+                        "name": "optionsId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Box"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully"
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/prices": {
+            "post": {
+                "tags": [
+                    "Prices"
+                ],
+                "summary": "Create new",
+                "operationId": "dde05fafa147fe190eda2eafb1d41891",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "configuration_id": {
+                                        "type": "integer"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "configuration_id": "10",
+                                    "price": 10000,
+                                    "start_date": "2020-09-11 12:12:12",
+                                    "end_date": "2020-09-12 12:12:12"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Price"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/prices/{priceId}": {
+            "get": {
+                "tags": [
+                    "Prices"
+                ],
+                "summary": "Get by ID",
+                "operationId": "f16638207f70090890d0ba980cd519da",
+                "parameters": [
+                    {
+                        "name": "priceId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Price"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Prices"
+                ],
+                "summary": "Delete by ID",
+                "operationId": "7b882d2f28355aae3dc1fe7c16db1ae5",
+                "parameters": [
+                    {
+                        "name": "priceId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Prices"
+                ],
+                "summary": "Update by ID",
+                "operationId": "554d11c6cf68742d64ddfafbe7405454",
+                "parameters": [
+                    {
+                        "name": "priceId",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "configuration_id",
+                                    "price",
+                                    "start_date",
+                                    "end_date"
+                                ],
+                                "properties": {
+                                    "configuration_id": {
+                                        "type": "integer",
+                                        "example": "10"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "1000"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "2020-09-11 12:12:12"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "example": "2020-09-12 12:12:12"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully"
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Error": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "code": {
+                        "description": "Code",
+                        "type": "integer",
+                        "example": 404
+                    },
+                    "message": {
+                        "description": "Message",
+                        "type": "string",
+                        "example": "Not found"
+                    }
+                },
+                "type": "object"
+            },
+            "Car": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string",
+                        "example": "Kia rio 3"
+                    }
+                },
+                "type": "object"
+            },
+            "Configuration": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string",
+                        "example": "Lux"
+                    }
+                },
+                "type": "object"
+            },
+            "Option": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string",
+                        "example": "Lux"
+                    }
+                },
+                "type": "object"
+            },
+            "Price": {
+                "required": [
+                    "configuration_id",
+                    "price",
+                    "start_date",
+                    "end_date"
+                ],
+                "properties": {
+                    "configuration_id": {
+                        "description": "Configuration ID",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "price": {
+                        "description": "Price",
+                        "type": "integer",
+                        "example": 1000
+                    },
+                    "start_date": {
+                        "description": "Start date",
+                        "type": "string",
+                        "example": "2020-09-11 12:12:12"
+                    },
+                    "end_date": {
+                        "description": "End date",
+                        "type": "string",
+                        "example": "2020-09-12 12:12:12"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cars",
+            "description": "Cars"
+        },
+        {
+            "name": "Configurations",
+            "description": "Configurations"
+        },
+        {
+            "name": "Options",
+            "description": "Options"
+        },
+        {
+            "name": "Prices",
+            "description": "Prices"
+        }
+    ]
+}
