@@ -6,5 +6,5 @@ php artisan l5-swagger:generate
 php artisan migrate --seed
 ```
 
-## Полезные ссылки
+## Cсылки
 Swagger - http://localhost/api/documentation
